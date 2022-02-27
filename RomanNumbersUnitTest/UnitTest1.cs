@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HomeWork1;
 namespace RomanNumbersUnitTest
@@ -21,13 +22,22 @@ namespace RomanNumbersUnitTest
         }
         
         [TestMethod]
-        public void TestAdd()
+        public void TestAdd1()
         {
             var n1 = new RomanNumber(11);
             var n2 = new RomanNumber(43);
             var expected = new RomanNumber(11 + 43);
             var res = n1 + n2;
             Assert.IsTrue(res.CompareTo(expected) == 0);
+        }
+        
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void TestAdd2()
+        {
+            var n1 = new RomanNumber(12);
+            var res = n1 + null;
+            Assert.Equals(res, new RomanNumber(12));
         }
         
         [TestMethod]
@@ -88,6 +98,28 @@ namespace RomanNumbersUnitTest
             Assert.IsTrue(
                 (n1 / n2).CompareTo(new RomanNumber(232 / 312)) == 0
             );
+        }
+
+        [TestMethod]
+        public void TestCompare1()
+        {
+            var n1 = new RomanNumber(100);
+            var n2 = new RomanNumber(100);
+            Assert.IsTrue(n1.CompareTo(n2) == 0);
+        }
+        [TestMethod]
+        public void TestCompare2()
+        {
+            var n1 = new RomanNumber(99);
+            var n2 = new RomanNumber(100);
+            Assert.IsTrue(n1.CompareTo(n2) == -1);
+        }
+        [TestMethod]
+        public void TestCompare3()
+        {
+            var n1 = new RomanNumber(101);
+            var n2 = new RomanNumber(100);
+            Assert.IsTrue(n1.CompareTo(n2) == 1);
         }
         
     }
