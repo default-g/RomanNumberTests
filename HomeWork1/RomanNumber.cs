@@ -8,7 +8,7 @@ namespace HomeWork1
     
     public RomanNumber(ushort n)
     {
-        if (n <= 0)
+        if (n <= 0 || n >= 4000)
         {
             throw new RomanNumberException();
         }
@@ -16,20 +16,34 @@ namespace HomeWork1
     }
     public static RomanNumber operator +(RomanNumber? n1, RomanNumber? n2)
     {
+        if(n1 is null || n2 is null) throw new RomanNumberException();
         return new RomanNumber((ushort)(n1.number + n2.number));
     }
     public static RomanNumber operator -(RomanNumber? n1, RomanNumber? n2)
     {
+        if(n1 is null || n2 is null) throw new RomanNumberException();
         if (n1.number <= n2.number) throw new RomanNumberException();
         return new RomanNumber((ushort)(n1.number - n2.number));
     }
     public static RomanNumber operator *(RomanNumber? n1, RomanNumber? n2)
     {
+        if(n1 is null || n2 is null) throw new RomanNumberException();
         return new RomanNumber((ushort)(n1.number * n2.number));
     }
     public static RomanNumber operator /(RomanNumber? n1, RomanNumber? n2)
     {
-        return new RomanNumber((ushort)(n1.number / n2.number));
+        if(n1 is null || n2 is null) throw new RomanNumberException();
+        if (
+            n1.number % n2.number == 0 &&
+            n1.number >= n2.number
+        )
+        {
+            return new RomanNumber((ushort) (n1.number / n2.number));
+        }
+        else
+        {
+            throw new RomanNumberException();
+        }
     }
     public override string ToString()
     {

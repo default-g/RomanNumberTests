@@ -33,12 +33,12 @@ namespace RomanNumbersUnitTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
+        [ExpectedException(typeof(RomanNumberException))]
         public void TestAdd2()
         {
             var n1 = new RomanNumber(12);
-            var res = n1 + null;
-            Assert.Equals(res, new RomanNumber(12));
+            RomanNumber? n2 = null;
+            var res = n1 + n2;
         }
 
         [TestMethod]
@@ -81,24 +81,20 @@ namespace RomanNumbersUnitTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(RomanNumberException))]
         public void TestDiv1()
         {
             var n1 = new RomanNumber(232);
             var n2 = new RomanNumber(12);
-            Assert.IsTrue(
-                (n1 / n2).CompareTo(new RomanNumber(232 / 12)) == 0
-            );
+            var res = n1 / n2;
         }
 
         [TestMethod]
-        [ExpectedException(typeof(RomanNumberException))]
         public void TestDiv2()
         {
-            var n1 = new RomanNumber(232);
-            var n2 = new RomanNumber(312);
-            Assert.IsTrue(
-                (n1 / n2).CompareTo(new RomanNumber(232 / 312)) == 0
-            );
+            var n1 = new RomanNumber(100);
+            var n2 = new RomanNumber(10);
+            Assert.IsTrue((n1 / n2).CompareTo(new RomanNumber(100 / 10)) == 0);
         }
 
         [TestMethod]
